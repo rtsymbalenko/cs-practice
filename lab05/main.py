@@ -1,21 +1,12 @@
 import sys
 
-from logstats import parse_event
+from logstats import count_levels
 
 filename = sys.stdin.readline().strip()
 
-total = 0
-broken = 0
 with open(filename, encoding="utf-8") as log:
-    for line in log:
-        if not line.strip():
-            continue
-        total += 1
-        try:
-            parse_event(line)
-        except ValueError:
-            broken += 1
+    counts = count_levels(log)
 
-print(total)
-print(0)
-print(broken)
+print(sum(counts.values()))
+print(counts.get("ERROR", 0))
+print(counts.get("BROKEN", 0))
