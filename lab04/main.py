@@ -1,5 +1,5 @@
 import sys
-from stats import average_by_city, parse_record, read_valid
+from stats import average_by_city, parse_record, read_valid, warmest_city
 
 lines = sys.stdin.read().splitlines()
 records = read_valid(lines)
@@ -13,7 +13,11 @@ for line in lines:
     except ValueError:
         skipped += 1
 
-averages = average_by_city(records)
 print(len(records))
 print(skipped)
-print(f"{max(averages.values()):.1f}" if averages else "0.0")
+
+if records:
+    averages = average_by_city(records)
+    print(f"{averages[warmest_city(records)]:.1f}")
+else:
+    print("0.0")
