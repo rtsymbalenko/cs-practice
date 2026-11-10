@@ -22,3 +22,13 @@ def read_valid(lines: list[str]) -> list[dict]:
         except ValueError:
             continue
     return records
+
+
+def average_by_city(records: list[dict]) -> dict:
+    totals: dict = {}
+    counts: dict = {}
+    for record in records:
+        city = record["city"]
+        totals[city] = totals.get(city, 0.0) + record["temperature"]
+        counts[city] = counts.get(city, 0) + 1
+    return {city: round(totals[city] / counts[city], 1) for city in totals}
