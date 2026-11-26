@@ -14,3 +14,36 @@ def replace_rectangle(matrix, row_start, row_stop, column_start, column_stop, va
     arr = np.asarray(matrix, dtype=float).copy()
     arr[row_start:row_stop, column_start:column_stop] = value
     return arr.tolist()
+
+
+def matrix_vector_product(matrix, vector):
+    arr = np.asarray(matrix, dtype=float)
+    vec = np.asarray(vector, dtype=float)
+    return (arr @ vec).tolist()
+
+
+def matrix_multiply(left, right):
+    a = np.asarray(left, dtype=float)
+    b = np.asarray(right, dtype=float)
+    return (a @ b).tolist()
+
+
+def transpose_matrix(matrix):
+    return np.asarray(matrix, dtype=float).T.tolist()
+
+
+def solve_system(matrix, vector):
+    a = np.asarray(matrix, dtype=float)
+    b = np.asarray(vector, dtype=float)
+    return np.round(np.linalg.solve(a, b), 6).tolist()
+
+
+def tensor_channel_mean(tensor):
+    arr = np.asarray(tensor, dtype=float)
+    return np.round(arr.mean(axis=-1), 6).tolist()
+
+
+def point_distance(first, second):
+    a = np.asarray(first, dtype=float)
+    b = np.asarray(second, dtype=float)
+    return float(np.round(np.linalg.norm(a - b), 6))
